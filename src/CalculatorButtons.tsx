@@ -4,6 +4,9 @@ type ButtonActions = {
   onNumberClicked: (num: string) => void;
   onClearClicked: () => void;
   onBackspaceClicked: () => void;
+  onAddClicked: () => void;
+  onSubtractClicked: () => void;
+  onEqualsClicked: () => void;
 };
 
 export function CalculatorButtons(props: ButtonActions) {
@@ -52,10 +55,10 @@ export function CalculatorButtons(props: ButtonActions) {
       <Button onClick={() => props.onNumberClicked("*")} color="#CEA6B1">
         *
       </Button>
-      <Button onClick={() => props.onNumberClicked("-")} color="#CEA6B1">
+      <Button onClick={props.onSubtractClicked} color="#CEA6B1">
         -
       </Button>
-      <Button onClick={() => props.onNumberClicked("+")} color="#CEA6B1">
+      <Button onClick={props.onAddClicked} color="#CEA6B1">
         +
       </Button>
       <Button onClick={props.onBackspaceClicked} color="#CEA6B1">
@@ -64,7 +67,7 @@ export function CalculatorButtons(props: ButtonActions) {
       <Button onClick={() => props.onNumberClicked("/")} color="#CEA6B1">
         ÷
       </Button>
-      <Button onClick={() => props.onNumberClicked("=")} color="#C697A4">
+      <Button onClick={props.onEqualsClicked} color="#C697A4">
         =
       </Button>
     </div>

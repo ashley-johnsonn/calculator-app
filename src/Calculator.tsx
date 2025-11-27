@@ -4,21 +4,22 @@ import { CalculatorButtons } from "./CalculatorButtons";
 
 export function Calculator() {
   const [displayValue, setDisplayValue] = useState("0");
-
-  //   const onDivideClicked = () => {
-  //     console.log("clicked it!!!");
-  //   };
+  const [storedValue, setStoredValue] = useState<string | null>(null);
+  const [operation, setOperation] = useState<string | null>(null);
 
   const handleNumberClicked = (num: string) => {
-    if (displayValue == "0") {
-      setDisplayValue(num);
-    } else {
-      setDisplayValue(displayValue + num);
-    }
+    setDisplayValue(displayValue === "0" ? num : displayValue + num);
+    // if (displayValue == "0") {
+    //   setDisplayValue(num);
+    // } else {
+    //   setDisplayValue(displayValue + num);
+    // }
   };
 
   const handleClearClicked = () => {
     setDisplayValue("0");
+    setStoredValue(null);
+    setOperation(null);
   };
 
   const handleBackspaceClicked = () => {
@@ -29,11 +30,41 @@ export function Calculator() {
     }
   };
 
-  const buttonActions = {
-    onNumberClicked: handleNumberClicked,
-    onClearClicked: handleClearClicked,
-    onBackspaceClicked: handleBackspaceClicked,
+  const handleAddClicked = () => {
+    setStoredValue(displayValue);
+    setOperation("+");
+    setDisplayValue("0");
   };
+
+  const handleSubtractClicked = () => {
+    setStoredValue(displayValue);
+    setOperation("-");
+    setDisplayValue("0");
+  };
+
+  const handleEqualsClicked = () => {
+    if (storedValue && operation) {
+      const num1 = parseFloat(storedValue);
+      const num2 = parseFloat(displayValue);
+      let result = 0;
+
+      if (operation === "+") {
+        result = num1 + num2;
+      } else if (operation === "-") {
+        result = num1 - num2;
+      }
+
+      setDisplayValue(result.toString());
+      setStoredValue(null);
+      setOperation(null);
+    }
+  };
+
+  // const buttonActions = {
+  //   onNumberClicked: handleNumberClicked,
+  //   onClearClicked: handleClearClicked,
+  //   onBackspaceClicked: handleBackspaceClicked,
+  // };
 
   return (
     <>
@@ -42,6 +73,9 @@ export function Calculator() {
         onNumberClicked={handleNumberClicked}
         onClearClicked={handleClearClicked}
         onBackspaceClicked={handleBackspaceClicked}
+        onAddClicked={handleAddClicked}
+        onSubtractClicked={handleSubtractClicked}
+        onEqualsClicked={handleEqualsClicked}
       />
     </>
   );
