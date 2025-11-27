@@ -1,22 +1,15 @@
 import { useState } from "react";
 import "./App.css";
-import { CalculatorButtons } from "./CalculatorButtons";
+import { Calculator } from "./Calculator";
 
 function App() {
   const [count, setCount] = useState(0);
 
-  const onDivideClicked = () => {
-    console.log("clicked it!!!");
-  };
-
-  const buttonActions = {
-    onDivideClicked,
-  };
-
   return (
     <>
       <h1>Calculator 🌸</h1>
-      <CalculatorButtons actions={buttonActions} />
+      <Calculator />
+
       <div className="card">
         <button onClick={() => setCount((count) => count + 1)}>
           count is {count}
