@@ -5,10 +5,18 @@ import { CalculatorButtons } from "./CalculatorButtons";
 function App() {
   const [count, setCount] = useState(0);
 
+  const onDivideClicked = () => {
+    console.log("clicked it!!!");
+  };
+
+  const buttonActions = {
+    onDivideClicked,
+  };
+
   return (
     <>
       <h1>Calculator 🌸</h1>
-      <CalculatorButtons />
+      <CalculatorButtons actions={buttonActions} />
       <div className="card">
         <button onClick={() => setCount((count) => count + 1)}>
           count is {count}

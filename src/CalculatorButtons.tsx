@@ -1,6 +1,12 @@
 import { Button } from "./CalculatorButton";
 
-export function CalculatorButtons() {
+type ButtonActions = {
+  actions: {
+    onDivideClicked: () => void;
+  };
+};
+
+export function CalculatorButtons(props: ButtonActions) {
   return (
     <div className="calculator-buttons">
       <Button onClick={() => {}} color="#CEA6B1">
@@ -54,7 +60,7 @@ export function CalculatorButtons() {
       <Button onClick={() => {}} color="#CEA6B1">
         ←
       </Button>
-      <Button onClick={() => {}} color="#CEA6B1">
+      <Button onClick={props.actions.onDivideClicked} color="#CEA6B1">
         ÷
       </Button>
       <Button onClick={() => {}} color="#C697A4">
