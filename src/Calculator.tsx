@@ -6,9 +6,19 @@ export function Calculator() {
   const [displayValue, setDisplayValue] = useState("0");
   const [storedValue, setStoredValue] = useState<string | null>(null);
   const [operation, setOperation] = useState<string | null>(null);
+  const [currentInput, setCurrentInput] = useState("0");
+
+  const getDisplayText = () => {
+    if (storedValue && operation) {
+      return `${storedValue} ${operation} ${currentInput}`;
+    }
+    return currentInput;
+  };
 
   const handleNumberClicked = (num: string) => {
-    setDisplayValue(displayValue === "0" ? num : displayValue + num);
+    const newInput = currentInput === "0" ? num : currentInput + num;
+    setCurrentInput(newInput);
+    // setDisplayValue(displayValue === "0" ? num : displayValue + num);
     // if (displayValue == "0") {
     //   setDisplayValue(num);
     // } else {
@@ -20,32 +30,33 @@ export function Calculator() {
     setDisplayValue("0");
     setStoredValue(null);
     setOperation(null);
+    setCurrentInput("0");
   };
 
   const handleBackspaceClicked = () => {
     if (displayValue.length === 1) {
-      setDisplayValue("0");
+      setCurrentInput("0");
     } else {
-      setDisplayValue(displayValue.slice(0, -1));
+      setCurrentInput(displayValue.slice(0, -1));
     }
   };
 
   const handleAddClicked = () => {
-    setStoredValue(displayValue);
+    setStoredValue(currentInput);
     setOperation("+");
-    setDisplayValue("0");
+    setCurrentInput("0");
   };
 
   const handleSubtractClicked = () => {
-    setStoredValue(displayValue);
+    setStoredValue(currentInput);
     setOperation("-");
-    setDisplayValue("0");
+    setCurrentInput("0");
   };
 
   const handleEqualsClicked = () => {
     if (storedValue && operation) {
       const num1 = parseFloat(storedValue);
-      const num2 = parseFloat(displayValue);
+      const num2 = parseFloat(currentInput);
       let result = 0;
 
       if (operation === "+") {
@@ -54,7 +65,8 @@ export function Calculator() {
         result = num1 - num2;
       }
 
-      setDisplayValue(result.toString());
+      const resultString = result.toString();
+      setCurrentInput(resultString);
       setStoredValue(null);
       setOperation(null);
     }
@@ -68,7 +80,7 @@ export function Calculator() {
 
   return (
     <>
-      <NumberDisplay value={displayValue} />
+      <NumberDisplay value={getDisplayText()} />
       <CalculatorButtons
         onNumberClicked={handleNumberClicked}
         onClearClicked={handleClearClicked}
