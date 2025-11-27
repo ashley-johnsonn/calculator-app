@@ -18,12 +18,6 @@ export function Calculator() {
   const handleNumberClicked = (num: string) => {
     const newInput = currentInput === "0" ? num : currentInput + num;
     setCurrentInput(newInput);
-    // setDisplayValue(displayValue === "0" ? num : displayValue + num);
-    // if (displayValue == "0") {
-    //   setDisplayValue(num);
-    // } else {
-    //   setDisplayValue(displayValue + num);
-    // }
   };
 
   const handleClearClicked = () => {
@@ -53,6 +47,29 @@ export function Calculator() {
     setCurrentInput("0");
   };
 
+  const handleDivideClicked = () => {
+    setStoredValue(currentInput);
+    setOperation("/");
+    setCurrentInput("0");
+  };
+
+  const handleMultiplyClicked = () => {
+    setStoredValue(currentInput);
+    setOperation("*");
+    setCurrentInput("0");
+  };
+
+  const handleToggleSignClicked = () => {
+    if (currentInput === "0") {
+      return;
+    }
+    if (currentInput.startsWith("-")) {
+      setCurrentInput(currentInput.substring(1));
+    } else {
+      setCurrentInput("-" + currentInput);
+    }
+  };
+
   const handleEqualsClicked = () => {
     if (storedValue && operation) {
       const num1 = parseFloat(storedValue);
@@ -63,6 +80,10 @@ export function Calculator() {
         result = num1 + num2;
       } else if (operation === "-") {
         result = num1 - num2;
+      } else if (operation === "*") {
+        result = num1 * num2;
+      } else if (operation === "/") {
+        result = num1 / num2;
       }
 
       const resultString = result.toString();
@@ -71,12 +92,6 @@ export function Calculator() {
       setOperation(null);
     }
   };
-
-  // const buttonActions = {
-  //   onNumberClicked: handleNumberClicked,
-  //   onClearClicked: handleClearClicked,
-  //   onBackspaceClicked: handleBackspaceClicked,
-  // };
 
   return (
     <>
@@ -88,6 +103,9 @@ export function Calculator() {
         onAddClicked={handleAddClicked}
         onSubtractClicked={handleSubtractClicked}
         onEqualsClicked={handleEqualsClicked}
+        onToggleSignClicked={handleToggleSignClicked}
+        onDivideClicked={handleDivideClicked}
+        onMultiplyClicked={handleMultiplyClicked}
       />
     </>
   );
