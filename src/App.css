@@ -36,12 +36,17 @@
 
 .calculator-buttons {
   display: flex;
+  flex-direction: column;
   flex-wrap: wrap;
-  gap: 1em;
+  height: 400px;
+  gap: 10px;
 
 }
 
 .individual-button {
-  flex: 0 0 calc(33.3333% - (2 * 1em / 3));
+  flex: 0 0 calc(0.25 * (100% - 30px));
   box-sizing: border-box;
+}
+.individual-button:last-of-type {
+  flex-grow: 2;
 }
