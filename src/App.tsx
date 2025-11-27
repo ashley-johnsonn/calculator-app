@@ -1,23 +1,12 @@
-import { useState } from "react";
 import "./App.css";
 import { Calculator } from "./Calculator";
 
 function App() {
-  const [count, setCount] = useState(0);
-
   return (
     <>
       <h1>Calculator 🌸</h1>
       <Calculator />
-
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
+      <p>follow me on github @Ashley-Johnson</p>
     </>
   );
 }

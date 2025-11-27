@@ -3,7 +3,7 @@ import { NumberDisplay } from "./NumberDisplay";
 import { CalculatorButtons } from "./CalculatorButtons";
 
 export function Calculator() {
-  const [displayValue, setDisplayValue] = useState("0");
+  const [, setDisplayValue] = useState("0");
   const [storedValue, setStoredValue] = useState<string | null>(null);
   const [operation, setOperation] = useState<string | null>(null);
   const [currentInput, setCurrentInput] = useState("0");
@@ -28,10 +28,10 @@ export function Calculator() {
   };
 
   const handleBackspaceClicked = () => {
-    if (displayValue.length === 1) {
+    if (currentInput.length === 1) {
       setCurrentInput("0");
     } else {
-      setCurrentInput(displayValue.slice(0, -1));
+      setCurrentInput(currentInput.slice(0, -1));
     }
   };
 
