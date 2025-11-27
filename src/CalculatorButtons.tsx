@@ -2,6 +2,8 @@ import { Button } from "./CalculatorButton";
 
 type ButtonActions = {
   onNumberClicked: (num: string) => void;
+  onClearClicked: () => void;
+  onBackspaceClicked: () => void;
 };
 
 export function CalculatorButtons(props: ButtonActions) {
@@ -16,7 +18,7 @@ export function CalculatorButtons(props: ButtonActions) {
       <Button onClick={() => props.onNumberClicked("1")} color="#CEA6B1">
         1
       </Button>
-      <Button onClick={() => props.onNumberClicked("C")} color="#CEA6B1">
+      <Button onClick={props.onClearClicked} color="#CEA6B1">
         C
       </Button>
       <Button onClick={() => props.onNumberClicked("8")} color="#CEA6B1">
@@ -56,8 +58,7 @@ export function CalculatorButtons(props: ButtonActions) {
       <Button onClick={() => props.onNumberClicked("+")} color="#CEA6B1">
         +
       </Button>
-      {/* TODO: Make this a backspace */}
-      <Button onClick={() => {}} color="#CEA6B1">
+      <Button onClick={props.onBackspaceClicked} color="#CEA6B1">
         ←
       </Button>
       <Button onClick={() => props.onNumberClicked("/")} color="#CEA6B1">

@@ -10,17 +10,39 @@ export function Calculator() {
   //   };
 
   const handleNumberClicked = (num: string) => {
-    setDisplayValue(num);
+    if (displayValue == "0") {
+      setDisplayValue(num);
+    } else {
+      setDisplayValue(displayValue + num);
+    }
+  };
+
+  const handleClearClicked = () => {
+    setDisplayValue("0");
+  };
+
+  const handleBackspaceClicked = () => {
+    if (displayValue.length === 1) {
+      setDisplayValue("0");
+    } else {
+      setDisplayValue(displayValue.slice(0, -1));
+    }
   };
 
   const buttonActions = {
     onNumberClicked: handleNumberClicked,
+    onClearClicked: handleClearClicked,
+    onBackspaceClicked: handleBackspaceClicked,
   };
 
   return (
     <>
       <NumberDisplay value={displayValue} />
-      <CalculatorButtons onNumberClicked={handleNumberClicked} />
+      <CalculatorButtons
+        onNumberClicked={handleNumberClicked}
+        onClearClicked={handleClearClicked}
+        onBackspaceClicked={handleBackspaceClicked}
+      />
     </>
   );
 }
