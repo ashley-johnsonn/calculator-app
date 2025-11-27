@@ -8,7 +8,7 @@ export const NumberDisplay: React.FC<DisplayProps> = ({ value }) => {
       style={{
         padding: "20px",
         fontSize: "40px",
-        backgroundColor: "#CEA6B1",
+        backgroundColor: "#F4BED7",
         borderRadius: "5px",
         textAlign: "right",
         minHeight: "60px",

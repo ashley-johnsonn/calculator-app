@@ -6,7 +6,7 @@ function App() {
     <>
       <h1>Calculator 🌸</h1>
       <Calculator />
-      <p>follow me on github @Ashley-Johnson</p>
+      <p>follow me on github @ashley-johnsonn</p>
     </>
   );
 }
