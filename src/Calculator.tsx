@@ -3,16 +3,20 @@ import { NumberDisplay } from "./NumberDisplay";
 import { CalculatorButtons } from "./CalculatorButtons";
 
 export function Calculator() {
-  const [, setDisplayValue] = useState("0");
   const [storedValue, setStoredValue] = useState<string | null>(null);
   const [operation, setOperation] = useState<string | null>(null);
   const [currentInput, setCurrentInput] = useState("0");
+  const [expression, setExpression] = useState("");
 
-  const getDisplayText = () => {
-    if (storedValue && operation) {
-      return `${storedValue} ${operation} ${currentInput}`;
+  // TODO: Update this to show the full expression
+  // When expression is non-empty, show: expression + currentInput
+  // When expression is empty, just show currentInput
+  const getDisplayText = (): string => {
+    if (!expression) {
+      return currentInput;
+    } else {
+      return expression + currentInput;
     }
-    return currentInput;
   };
 
   // Calculates pending operation for chaining (e.g. 1+1+1=3)
@@ -45,10 +49,10 @@ export function Calculator() {
   };
 
   const handleClearClicked = () => {
-    setDisplayValue("0");
     setStoredValue(null);
     setOperation(null);
     setCurrentInput("0");
+    setExpression("");
   };
 
   const handleBackspaceClicked = () => {
@@ -60,24 +64,28 @@ export function Calculator() {
   };
 
   const handleAddClicked = () => {
+    setExpression(expression + currentInput + " + ");
     setStoredValue(calculatePendingOperation());
     setOperation("+");
     setCurrentInput("0");
   };
 
   const handleSubtractClicked = () => {
+    setExpression(expression + currentInput + " - ");
     setStoredValue(calculatePendingOperation());
     setOperation("-");
     setCurrentInput("0");
   };
 
   const handleDivideClicked = () => {
+    setExpression(expression + currentInput + " / ");
     setStoredValue(calculatePendingOperation());
     setOperation("/");
     setCurrentInput("0");
   };
 
   const handleMultiplyClicked = () => {
+    setExpression(expression + currentInput + " * ");
     setStoredValue(calculatePendingOperation());
     setOperation("*");
     setCurrentInput("0");
@@ -98,6 +106,7 @@ export function Calculator() {
     setCurrentInput(calculatePendingOperation());
     setStoredValue(null);
     setOperation(null);
+    setExpression("");
   };
 
   return (
