@@ -1,12 +1,14 @@
 import { useState } from "react";
 import { NumberDisplay } from "./NumberDisplay";
 import { CalculatorButtons } from "./CalculatorButtons";
+import catGif from "./assets/cat.gif";
 
 export function Calculator() {
   const [storedValue, setStoredValue] = useState<string | null>(null);
   const [operation, setOperation] = useState<string | null>(null);
   const [currentInput, setCurrentInput] = useState("0");
   const [expression, setExpression] = useState("");
+  const [showCatAnimation, setShowCatAnimation] = useState(false);
 
   // TODO: Update this to show the full expression
   // When expression is non-empty, show: expression + currentInput
@@ -102,15 +104,36 @@ export function Calculator() {
     }
   };
 
+  // TODO(human): Add animation delay logic
+  // 1. Show the cat animation
+  // 2. After a delay (e.g., 1000ms), hide the cat and show the result
   const handleEqualsClicked = () => {
-    setCurrentInput(calculatePendingOperation());
-    setStoredValue(null);
-    setOperation(null);
-    setExpression("");
+    setShowCatAnimation(true);
+    setTimeout(() => {
+      setShowCatAnimation(false);
+      setCurrentInput(calculatePendingOperation());
+      setStoredValue(null);
+      setOperation(null);
+      setExpression("");
+    }, 1500);
   };
 
   return (
     <>
+      {showCatAnimation && (
+        <img
+          src={catGif}
+          alt="Cat bonking calculator"
+          style={{
+            width: "120px",
+            display: "block",
+            transform: "rotate(75deg)",
+            position: "absolute",
+            right: "390px",
+            top: "185px",
+          }}
+        />
+      )}
       <NumberDisplay value={getDisplayText()} />
       <CalculatorButtons
         onNumberClicked={handleNumberClicked}
