@@ -104,9 +104,6 @@ export function Calculator() {
     }
   };
 
-  // TODO(human): Add animation delay logic
-  // 1. Show the cat animation
-  // 2. After a delay (e.g., 1000ms), hide the cat and show the result
   const handleEqualsClicked = () => {
     setShowCatAnimation(true);
     setTimeout(() => {
@@ -115,26 +112,27 @@ export function Calculator() {
       setStoredValue(null);
       setOperation(null);
       setExpression("");
-    }, 1500);
+    }, 1000);
   };
 
   return (
     <>
-      {showCatAnimation && (
-        <img
-          src={catGif}
-          alt="Cat bonking calculator"
-          style={{
-            width: "120px",
-            display: "block",
-            transform: "rotate(75deg)",
-            position: "absolute",
-            right: "390px",
-            top: "185px",
-          }}
-        />
-      )}
-      <NumberDisplay value={getDisplayText()} />
+      <div style={{ position: "relative", display: "inline-block" }}>
+        {showCatAnimation && (
+          <img
+            src={catGif}
+            alt="Cat bonking calculator"
+            style={{
+              width: "120px",
+              transform: "rotate(75deg)",
+              position: "absolute",
+              right: "-73px",
+              top: "5px",
+            }}
+          />
+        )}
+        <NumberDisplay value={getDisplayText()} />
+      </div>
       <CalculatorButtons
         onNumberClicked={handleNumberClicked}
         onClearClicked={handleClearClicked}
